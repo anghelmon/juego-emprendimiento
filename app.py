@@ -115,6 +115,11 @@ st.markdown(
         box-shadow: 0px 3px 0px #0369a1;
     }
 
+    .badge-hard {
+        background: #dc2626 !important;
+        box-shadow: 0px 3px 0px #991b1b !important;
+    }
+
     .question-title {
         color: #0f172a;
         font-size: 1.4rem;
@@ -197,8 +202,8 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Banco total de preguntas (con montos visibles y sin revelar impacto en clientes/reputación)
-BANCO_PREGUNTAS = [
+# BANCO MODO FÁCIL (Precios Visibles)
+BANCO_FACIL = [
     {
         "titulo": "Lanzamiento del Producto",
         "situacion": (
@@ -525,337 +530,495 @@ BANCO_PREGUNTAS = [
             ),
         ],
     },
+]
+
+# BANCO MODO DIFÍCIL (Sin precios visibles + Situaciones complejas)
+BANCO_DIFICIL = [
     {
-        "titulo": "Ciberseguridad y Datos",
+        "titulo": "Caída Crítica de Servidores",
         "situacion": (
-            "Se detectó un intento de acceso no autorizado a la plataforma."
+            "Tu servidor principal cayó durante la hora pico de ventas. Los"
+            " clientes no pueden completar compras."
         ),
         "opciones": [
             (
-                "🔒 Contratar una Auditoría Completa de Ciberseguridad [Costo:"
-                " -$450]",
-                -450,
-                0,
-                15,
-                "Auditoría de Seguridad",
-            ),
-            (
-                "🛡️ Aplicar Parches y Actualizaciones de seguridad básicas"
-                " [Costo: -$100]",
-                -100,
-                0,
-                5,
-                "Parches Básicos",
-            ),
-            (
-                "⚠️ Ignorar la alerta al no registrarse pérdidas graves"
-                " [Costo: $0]",
-                0,
-                -15,
-                -30,
-                "Ignoró Alerta Ciberseguridad",
-            ),
-        ],
-    },
-    {
-        "titulo": "Campaña de Influencers",
-        "situacion": (
-            "Un creador de contenido relevante en tu sector ofrece"
-            " promocionarte."
-        ),
-        "opciones": [
-            (
-                "🌟 Contratar una Campaña Exclusiva de recomendación"
-                " [Inversión: -$500]",
-                -500,
-                35,
-                10,
-                "Campaña Influencer Exclusiva",
-            ),
-            (
-                "🎁 Enviar Muestras Gratis del producto esperando mención"
-                " [Costo: -$120]",
-                -120,
-                12,
-                3,
-                "Muestras Gratis",
-            ),
-            (
-                "❌ Rechazar la propuesta y mantener el enfoque actual [Costo:"
-                " $0]",
-                0,
-                0,
-                0,
-                "Rechazó Influencer",
-            ),
-        ],
-    },
-    {
-        "titulo": "Regulaciones e Impuestos",
-        "situacion": (
-            "Se aprueba un ajuste normativo que requiere adecuar tu modelo"
-            " comercial."
-        ),
-        "opciones": [
-            (
-                "📜 Contratar Asesoría Jurídica Completa para estar en regla"
-                " [Costo: -$350]",
-                -350,
-                0,
-                10,
-                "Asesoría Jurídica Completa",
-            ),
-            (
-                "📝 Realizar un Trámite Interno Básico de adecuación [Costo:"
-                " -$100]",
-                -100,
-                0,
-                2,
-                "Trámite Interno Básico",
-            ),
-            (
-                "⏳ Postergar la adecuación hasta recibir una notificación"
-                " [Costo: $0]",
-                0,
-                0,
-                -20,
-                "Postergó Ajuste Legal",
-            ),
-        ],
-    },
-    {
-        "titulo": "Expansión Geográfica",
-        "situacion": (
-            "Aparece la oportunidad de abrir ventas en una nueva provincia."
-        ),
-        "opciones": [
-            (
-                "🌍 Iniciar una Expansión Total e inmediata en la nueva zona"
-                " [Inversión: -$600]",
-                -600,
-                25,
-                0,
-                "Expansión Total",
-            ),
-            (
-                "🏙️ Hacer una Prueba Piloto Regional con presupuesto acotado"
-                " [Inversión: -$250]",
-                -250,
-                10,
-                3,
-                "Prueba Piloto Regional",
-            ),
-            (
-                "🏛️ Consolidar primero el Mercado Actual antes de expandirse"
-                " [Inversión: -$100]",
-                -100,
-                5,
-                5,
-                "Consolidó Mercado Actual",
-            ),
-        ],
-    },
-    {
-        "titulo": "Adopción de Inteligencia Artificial",
-        "situacion": (
-            "Puedes integrar herramientas de IA para automatizar la operación."
-        ),
-        "opciones": [
-            (
-                "🤖 Implementar IA Avanzada en la atención y ventas [Inversión:"
-                " -$400]",
-                -400,
+                "🚨 Migrar de inmediato a servidores Cloud de Alta Disponibilidad",
+                -750,
                 20,
+                15,
+                "Migración inmediata Cloud",
+            ),
+            (
+                "🛠️ Reiniciar servidores e intentar una reparación manual"
+                " rápida",
+                -200,
+                -10,
+                -15,
+                "Reparación manual rápida",
+            ),
+            (
+                "📢 Poner pantalla de mantenimiento y esperar a que pase el"
+                " pico",
+                0,
+                -30,
+                -25,
+                "Modo Mantenimiento pasivo",
+            ),
+        ],
+    },
+    {
+        "titulo": "Demanda Legal por Propiedad Intelectual",
+        "situacion": (
+            "Una gran corporación te exige retirar una marca registrada"
+            " alegando similitud en el logo."
+        ),
+        "opciones": [
+            (
+                "⚖️ Contratar un bufete de abogados experto para defender la"
+                " marca",
+                -800,
+                0,
                 10,
-                "Implementación IA Avanzada",
+                "Defensa legal especialista",
             ),
             (
-                "💬 Integrar un Chatbot Sencillo de respuestas automáticas"
-                " [Inversión: -$100]",
-                -100,
-                5,
-                2,
-                "Chatbot Sencillo",
+                "🎨 Aceptar hacer un Rebranding completo rápido de la marca",
+                -350,
+                -15,
+                -5,
+                "Rebranding de emergencia",
             ),
             (
-                "📞 Mantener el esquema de atención manual tradicional [Costo:"
-                " $0]",
+                "🙈 Ignorar la notificación esperando que no escalen el"
+                " proceso",
                 0,
                 -5,
-                0,
-                "Atención Manual",
+                -40,
+                "Ignoró demanda legal",
             ),
         ],
     },
     {
-        "titulo": "Innovación de Producto",
+        "titulo": "Fuga de Talento Clave",
         "situacion": (
-            "El mercado exige renovar el diseño y la interfaz general de tu"
-            " servicio."
+            "Tu Desarrollador Principal recibe una oferta del doble de sueldo"
+            " en una gran empresa."
         ),
         "opciones": [
             (
-                "🚀 Invertir en un Rediseño Total de la plataforma [Inversión:"
-                " -$700]",
-                -700,
-                30,
-                15,
-                "Rediseño Total",
-            ),
-            (
-                "📈 Aplicar Ajustes Visuales Menores sin alterar la estructura"
-                " [Inversión: -$200]",
-                -200,
-                8,
+                "💰 Igualar la oferta salarial y ofrecer participación en la"
+                " empresa",
+                -600,
                 5,
-                "Ajustes Menores",
+                10,
+                "Retención de talento con equity",
             ),
             (
-                "🔒 Mantener la Versión Actual sin gastar recursos [Costo: $0]",
+                "🤝 Dejarlo ir y contratar a un equipo junior de reemplazo",
+                -250,
+                -15,
+                -10,
+                "Reemplazo por Juniors",
+            ),
+            (
+                "⌛ Absorber su trabajo entre los fundadores restantes",
+                0,
+                -20,
+                -15,
+                "Sobrecarga de trabajo interna",
+            ),
+        ],
+    },
+    {
+        "titulo": "Auditoría Tributaria Inesperada",
+        "situacion": (
+            "El ministerio de hacienda requiere una revisión completa de"
+            " contabilidad de tus primeros meses."
+        ),
+        "opciones": [
+            (
+                "📋 Contratar una auditoría contable externa para dejar todo en"
+                " regla",
+                -500,
+                0,
+                10,
+                "Auditoría Contable Externa",
+            ),
+            (
+                "📁 Revisar y presentar los papeles por tu propia cuenta",
+                -100,
                 0,
                 -10,
+                "Revisión Interna Rápida",
+            ),
+            (
+                "⏳ Solicitar prórrogas consecutivas para ganar tiempo",
+                0,
+                0,
+                -25,
+                "Prórroga Tributaria",
+            ),
+        ],
+    },
+    {
+        "titulo": "Ronda de Inversión Agresiva",
+        "situacion": (
+            "Un fondo de Venture Capital ofrece capital masivo, pero exigen el"
+            " 51% de las decisiones de la junta."
+        ),
+        "opciones": [
+            (
+                "🚀 Aceptar la inversión perdiendo la mayoría del control",
+                2000,
+                40,
+                -20,
+                "Aceptó VC Agresivo",
+            ),
+            (
+                "🤝 Negociar una ronda más pequeña reteniendo la mayoría",
+                600,
+                15,
+                5,
+                "Negoció Ronda Moderada",
+            ),
+            (
+                "🚫 Rechazar de plano y continuar financiando con ventas"
+                " propias",
+                0,
+                0,
+                15,
+                "Rechazó VC",
+            ),
+        ],
+    },
+    {
+        "titulo": "Defecto de Calidad en Lote Masivo",
+        "situacion": (
+            "El último lote enviado a 100 clientes llegó con una falla"
+            " importante de funcionamiento."
+        ),
+        "opciones": [
+            (
+                "🚚 Retirar el lote completo, reemplazar gratis y pedir"
+                " disculpas",
+                -900,
+                10,
+                20,
+                "Retiro y Reemplazo Total",
+            ),
+            (
+                "🔧 Ofrecer un cupón de descuento para la próxima compra",
+                -200,
+                -25,
+                -20,
+                "Cupón de Compensación",
+            ),
+            (
+                "❓ Atribuir el problema a un mal uso por parte del usuario",
+                0,
+                -50,
+                -35,
+                "Negación de Responsabilidad",
+            ),
+        ],
+    },
+    {
+        "titulo": "Ataque de Ransomware / Secuestro de Datos",
+        "situacion": (
+            "Hackers bloquearon la base de datos de usuarios y piden un rescate."
+        ),
+        "opciones": [
+            (
+                "🔒 Contratar expertos forenses en ciberseguridad para"
+                " recuperar datos",
+                -850,
+                0,
+                15,
+                "Ciberseguridad Forense",
+            ),
+            (
+                "💾 Restaurar un respaldo antiguo perdiendo un mes de datos",
+                -300,
+                -20,
+                -15,
+                "Restauración de Respaldo",
+            ),
+            (
+                "💸 Pagar el rescate exigido por los ciberdelincuentes",
+                -1000,
                 -10,
-                "Mantuvo Versión Actual",
+                -30,
+                "Pago de Rescate",
+            ),
+        ],
+    },
+    {
+        "titulo": "Expansión Internacional Arriesgada",
+        "situacion": (
+            "Surge la opción de abrir mercado en un país vecino con leyes muy"
+            " distintas."
+        ),
+        "opciones": [
+            (
+                "🌐 Crear subsidiaria e invertir en localización de marca"
+                " completa",
+                -900,
+                45,
+                10,
+                "Expansión Internacional Completa",
+            ),
+            (
+                "📦 Exportar envíos internacionales directos desde tu país",
+                -300,
+                15,
+                0,
+                "Ventas Directas de Exportación",
+            ),
+            (
+                "🛑 Cancelar expansión por el momento",
+                0,
+                0,
+                0,
+                "Canceló Expansión",
+            ),
+        ],
+    },
+    {
+        "titulo": "Campaña Boicoteada en Redes",
+        "situacion": (
+            "Una campaña publicitaria fue malinterpretada y se convirtió en"
+            " tendencia negativa."
+        ),
+        "opciones": [
+            (
+                "🕊️ Retirar la campaña de inmediato y donar a una causa benéfica",
+                -400,
+                5,
+                20,
+                "Retiro y Donación Benéfica",
+            ),
+            (
+                "📝 Publicar una aclaración justificando el mensaje original",
+                -50,
+                -15,
+                -15,
+                "Aclaración Pública",
+            ),
+            (
+                "🔥 Aprovechar la polémica para generar más clics y visibilidad",
+                0,
+                20,
+                -35,
+                "Polémica de Visibilidad",
+            ),
+        ],
+    },
+    {
+        "titulo": "Cambio de Algoritmo / Canal Principal",
+        "situacion": (
+            "La plataforma donde consigues el 80% de tus clientes cambió sus"
+            " políticas."
+        ),
+        "opciones": [
+            (
+                "Diversificar de inmediato invirtiendo en 3 canales nuevos",
+                -700,
+                25,
+                10,
+                "Diversificación de Canales",
+            ),
+            (
+                "Pagar las nuevas tarifas exigidas por la plataforma actual",
+                -400,
+                5,
+                0,
+                "Pago de Tarifas Plazas",
+            ),
+            (
+                "Reducir presupuesto de publicidad y confiar en la base actual",
+                0,
+                -30,
+                -10,
+                "Reducción de Publicidad",
             ),
         ],
     },
 ]
 
-# Inicialización del juego y selección aleatoria de 10 preguntas
-if "dinero" not in st.session_state:
+# Inicialización de modo de juego
+if "modo_dificultad" not in st.session_state:
+    st.session_state.modo_dificultad = None
+
+
+def iniciar_partida(modo):
+    st.session_state.modo_dificultad = modo
     st.session_state.dinero = 1500
     st.session_state.clientes = 10
     st.session_state.reputacion = 50
     st.session_state.fase = 0
     st.session_state.historial = []
-    st.session_state.preguntas_juego = random.sample(BANCO_PREGUNTAS, 10)
+
+    if modo == "Fácil":
+        st.session_state.preguntas_juego = random.sample(BANCO_FACIL, 10)
+    else:
+        st.session_state.preguntas_juego = random.sample(BANCO_DIFICIL, 10)
 
 
-def tomar_decision(
-    fase_nombre, eleccion, costo_capital, delta_clientes, delta_reputacion
-):
-    st.session_state.dinero += costo_capital
-    st.session_state.clientes += delta_clientes
-    st.session_state.reputacion += delta_reputacion
-
-    st.session_state.historial.append({
-        "Fase": f"Paso {st.session_state.fase + 1}: {fase_nombre}",
-        "Decisión": eleccion,
-        "Cambio Capital": f"${costo_capital:+d}",
-        "Cambio Clientes": f"{delta_clientes:+d}",
-        "Cambio Reputación": f"{delta_reputacion:+d}",
-        "Capital Restante": f"${st.session_state.dinero}",
-        "Reputación Restante": f"{st.session_state.reputacion}",
-    })
-
-    st.session_state.fase += 1
-    st.rerun()
-
-
-# Panel visual de métricas del jugador
-col1, col2, col3 = st.columns(3)
-with col1:
+# Selección de Modo de Juego inicial
+if st.session_state.modo_dificultad is None:
     st.markdown(
-        f"""
-        <div class="metric-card card-capital">
-            <span class="metric-label" style="color: #16a34a;">💵 Capital</span>
-            <div class="metric-value" style="color: #15803d;">${st.session_state.dinero}</div>
+        """
+        <div class="question-card" style="text-align: center;">
+            <div class="question-title">🎯 SELECCIONA TU MODO DE JUEGO</div>
+            <div class="question-text">¿Qué tan preparado te sientes para administrar tu empresa?</div>
         </div>
     """,
         unsafe_allow_html=True,
     )
 
-with col2:
-    st.markdown(
-        f"""
-        <div class="metric-card card-clientes">
-            <span class="metric-label" style="color: #0284c7;">👥 Clientes</span>
-            <div class="metric-value" style="color: #0369a1;">{max(0, st.session_state.clientes)}</div>
-        </div>
-    """,
-        unsafe_allow_html=True,
-    )
+    col_facil, col_dificil = st.columns(2)
+    with col_facil:
+        if st.button("🟢 Modo Normal / Fácil\n(Precios e inversiones visibles)"):
+            iniciar_partida("Fácil")
+            st.rerun()
 
-with col3:
-    st.markdown(
-        f"""
-        <div class="metric-card card-reputacion">
-            <span class="metric-label" style="color: #ca8a04;">⭐ Reputación</span>
-            <div class="metric-value" style="color: #a16207;">{max(0, st.session_state.reputacion)}/100</div>
-        </div>
-    """,
-        unsafe_allow_html=True,
-    )
+    with col_dificil:
+        if st.button("🔴 Modo Difícil / Experto\n(Situaciones críticas sin precios)"):
+            iniciar_partida("Difícil")
+            st.rerun()
 
-st.write("")
+else:
+    def tomar_decision(
+        fase_nombre, eleccion, costo_capital, delta_clientes, delta_reputacion
+    ):
+        st.session_state.dinero += costo_capital
+        st.session_state.clientes += delta_clientes
+        st.session_state.reputacion += delta_reputacion
 
-# Validación de Game Over (Pérdida por Capital <= 0 o Reputación <= 30)
-game_over = False
-if st.session_state.dinero <= 0:
-    st.error(
-        "💥 ¡QUIEBRA TÉCNICA! Te quedaste sin capital suficiente para continuar"
-        " operando."
-    )
-    game_over = True
-elif st.session_state.reputacion <= 30:
-    st.error(
-        "💥 ¡CRISIS SEVERA DE REPUTACIÓN! Tu reputación cayó a 30 o menos y la"
-        " empresa perdió total credibilidad."
-    )
-    game_over = True
+        st.session_state.historial.append({
+            "Fase": f"Paso {st.session_state.fase + 1}: {fase_nombre}",
+            "Decisión": eleccion,
+            "Cambio Capital": f"${costo_capital:+d}",
+            "Cambio Clientes": f"{delta_clientes:+d}",
+            "Cambio Reputación": f"{delta_reputacion:+d}",
+            "Capital Restante": f"${st.session_state.dinero}",
+            "Reputación Restante": f"{st.session_state.reputacion}",
+        })
 
-fase_actual = st.session_state.fase
-
-# Renderizado de Pregunta Actual
-if not game_over and fase_actual < 10:
-    datos = st.session_state.preguntas_juego[fase_actual]
-
-    st.markdown(
-        f"""
-        <div class="question-card">
-            <span class="question-badge">PASO {fase_actual + 1} DE 10</span>
-            <div class="question-title">{datos['titulo']}</div>
-            <div class="question-text">{datos['situacion']}</div>
-        </div>
-    """,
-        unsafe_allow_html=True,
-    )
-
-    for texto, capital, clientes, reputacion, log in datos["opciones"]:
-        if st.button(texto, use_container_width=True):
-            tomar_decision(datos["titulo"], log, capital, clientes, reputacion)
-
-# Pantalla de Fin de Juego
-elif game_over or fase_actual >= 10:
-    st.markdown(
-        '<div class="question-card" style="text-align: center;">',
-        unsafe_allow_html=True,
-    )
-    st.subheader("🏁 ¡FIN DE LA PARTIDA!")
-
-    if not game_over and st.session_state.dinero > 0:
-        st.balloons()
-        st.success(
-            "🏆 ¡FELICIDADES! Llegaste a la meta manteniendo una empresa"
-            " rentable y con excelente reputación."
-        )
-
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    # Generación únicamente del archivo descargable (sin tabla visible)
-    if st.session_state.historial:
-        df_historial = pd.DataFrame(st.session_state.historial)
-        csv_data = df_historial.to_csv(index=False).encode("utf-8")
-
-        st.download_button(
-            label="📥 Descargar Registro de Decisiones (CSV)",
-            data=csv_data,
-            file_name="historial_emprendimiento.csv",
-            mime="text/csv",
-        )
-
-# Botón para reiniciar partida
-if game_over or fase_actual >= 10:
-    if st.button("🔄 Jugar Otra Vez", use_container_width=True):
-        st.session_state.clear()
+        st.session_state.fase += 1
         st.rerun()
+
+    # Panel visual de métricas del jugador
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown(
+            f"""
+            <div class="metric-card card-capital">
+                <span class="metric-label" style="color: #16a34a;">💵 Capital</span>
+                <div class="metric-value" style="color: #15803d;">${st.session_state.dinero}</div>
+            </div>
+        """,
+            unsafe_allow_html=True,
+        )
+
+    with col2:
+        st.markdown(
+            f"""
+            <div class="metric-card card-clientes">
+                <span class="metric-label" style="color: #0284c7;">👥 Clientes</span>
+                <div class="metric-value" style="color: #0369a1;">{max(0, st.session_state.clientes)}</div>
+            </div>
+        """,
+            unsafe_allow_html=True,
+        )
+
+    with col3:
+        st.markdown(
+            f"""
+            <div class="metric-card card-reputacion">
+                <span class="metric-label" style="color: #ca8a04;">⭐ Reputación</span>
+                <div class="metric-value" style="color: #a16207;">{max(0, st.session_state.reputacion)}/100</div>
+            </div>
+        """,
+            unsafe_allow_html=True,
+        )
+
+    st.write("")
+
+    # Validación de Game Over (Pérdida por Capital <= 0 o Reputación <= 30)
+    game_over = False
+    if st.session_state.dinero <= 0:
+        st.error(
+            "💥 ¡QUIEBRA TÉCNICA! Te quedaste sin capital suficiente para"
+            " continuar operando."
+        )
+        game_over = True
+    elif st.session_state.reputacion <= 30:
+        st.error(
+            "💥 ¡CRISIS SEVERA DE REPUTACIÓN! Tu reputación cayó a 30 o menos y"
+            " la empresa perdió total credibilidad."
+        )
+        game_over = True
+
+    fase_actual = st.session_state.fase
+
+    # Renderizado de Pregunta Actual
+    if not game_over and fase_actual < 10:
+        datos = st.session_state.preguntas_juego[fase_actual]
+        badge_class = (
+            "question-badge badge-hard"
+            if st.session_state.modo_dificultad == "Difícil"
+            else "question-badge"
+        )
+
+        st.markdown(
+            f"""
+            <div class="question-card">
+                <span class="{badge_class}">PASO {fase_actual + 1} DE 10 • MODO {st.session_state.modo_dificultad.upper()}</span>
+                <div class="question-title">{datos['titulo']}</div>
+                <div class="question-text">{datos['situacion']}</div>
+            </div>
+        """,
+            unsafe_allow_html=True,
+        )
+
+        for texto, capital, clientes, reputacion, log in datos["opciones"]:
+            if st.button(texto, use_container_width=True):
+                tomar_decision(
+                    datos["titulo"], log, capital, clientes, reputacion
+                )
+
+    # Pantalla de Fin de Juego
+    elif game_over or fase_actual >= 10:
+        st.markdown(
+            '<div class="question-card" style="text-align: center;">',
+            unsafe_allow_html=True,
+        )
+        st.subheader("🏁 ¡FIN DE LA PARTIDA!")
+
+        if not game_over and st.session_state.dinero > 0:
+            st.balloons()
+            st.success(
+                "🏆 ¡FELICIDADES! Llegaste a la meta manteniendo una empresa"
+                " rentable y con excelente reputación."
+            )
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
+        # Generación únicamente del archivo descargable
+        if st.session_state.historial:
+            df_historial = pd.DataFrame(st.session_state.historial)
+            csv_data = df_historial.to_csv(index=False).encode("utf-8")
+
+            st.download_button(
+                label="📥 Descargar Registro de Decisiones (CSV)",
+                data=csv_data,
+                file_name=f"historial_emprendimiento_{st.session_state.modo_dificultad.lower()}.csv",
+                mime="text/csv",
+            )
+
+    # Botón para cambiar de modo o reiniciar
+    if game_over or fase_actual >= 10:
+        if st.button("🔄 Jugar Otra Vez / Cambiar Modo", use_container_width=True):
+            st.session_state.clear()
+            st.rerun()
