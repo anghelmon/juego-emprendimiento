@@ -296,7 +296,7 @@ BANCO_FACIL = [
     },
 ]
 
-# BANCO MODO DIFÍCIL (Precios ocultos, balances económicos más ajustados y alcanzables, 15 preguntas para mayor aleatoriedad)
+# BANCO MODO DIFÍCIL (Precios ocultos, balances ajustados)
 BANCO_DIFICIL = [
     {
         "titulo": "Caída Crítica de Servidores",
@@ -376,7 +376,7 @@ BANCO_DIFICIL = [
         "opciones": [
             ("🕊️ Retirar la campaña de inmediato y hacer un ajuste público", -150, 5, 15, "Ajuste Público"),
             ("📝 Publicar una aclaración justificando el mensaje original", -30, -10, -10, "Aclaración Pública"),
-            ("🔥 Ignorar las críticas y dejar corriendo los anuncios", 0, 10, -25, "Ignoró Boicot"),
+            ("🔥 Ignorar las críticas y dejar corriendo los anuncios", 0, 10, -25, "Ignóro Boicot"),
         ],
     },
     {
@@ -448,10 +448,11 @@ def iniciar_partida(modo):
     st.session_state.fase = 0
     st.session_state.historial = []
 
+    # Se seleccionan exactamente 6 preguntas al azar para cada partida
     if modo == "Fácil":
-        st.session_state.preguntas_juego = random.sample(BANCO_FACIL, 10)
+        st.session_state.preguntas_juego = random.sample(BANCO_FACIL, 6)
     else:
-        st.session_state.preguntas_juego = random.sample(BANCO_DIFICIL, 10)
+        st.session_state.preguntas_juego = random.sample(BANCO_DIFICIL, 6)
 
 
 # Selección de Modo de Juego inicial
@@ -544,15 +545,15 @@ else:
 
     fase_actual = st.session_state.fase
 
-    # Renderizado de Pregunta Actual
-    if not game_over and fase_actual < 10:
+    # Renderizado de Pregunta Actual (hasta 6 preguntas)
+    if not game_over and fase_actual < 6:
         datos = st.session_state.preguntas_juego[fase_actual]
         badge_class = "question-badge badge-hard" if st.session_state.modo_dificultad == "Difícil" else "question-badge"
 
         st.markdown(
             f"""
             <div class="question-card">
-                <span class="{badge_class}">PASO {fase_actual + 1} DE 10 • MODO {st.session_state.modo_dificultad.upper()}</span>
+                <span class="{badge_class}">PASO {fase_actual + 1} DE 6 • MODO {st.session_state.modo_dificultad.upper()}</span>
                 <div class="question-title">{datos['titulo']}</div>
                 <div class="question-text">{datos['situacion']}</div>
             </div>
@@ -565,7 +566,7 @@ else:
                 tomar_decision(datos["titulo"], log, capital, clientes, reputacion)
 
     # Pantalla de Fin de Juego
-    elif game_over or fase_actual >= 10:
+    elif game_over or fase_actual >= 6:
         st.markdown(
             '<div class="question-card" style="text-align: center;">',
             unsafe_allow_html=True,
@@ -591,7 +592,7 @@ else:
             )
 
     # Botón para cambiar de modo o reiniciar
-    if game_over or fase_actual >= 10:
+    if game_over or fase_actual >= 6:
         if st.button("🔄 Jugar Otra Vez / Cambiar Modo", use_container_width=True):
             st.session_state.clear()
             st.rerun()
